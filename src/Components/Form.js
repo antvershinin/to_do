@@ -9,7 +9,7 @@ export default function Form(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.addNewValue(current);
+    props.onSubmit(current);
     setCurrent("");
   }
 
