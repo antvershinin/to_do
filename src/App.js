@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Form from "./Form/Form";
+import "./App.css";
 
 function App() {
+  let [todoList, settodoList] = useState([]);
+
+  function addNewTask(text) {
+    const newTask = {
+      text: text,
+      completed: false,
+    };
+    settodoList([newTask, ...todoList]);
+  }
+
+  function ListAllTasks() {
+    const Alltasks = todoList.map((el) => (
+      <div className="toDoItem">
+        <button className="complete__task"></button>
+        <p> {el.text} </p>
+        <button className="remove__task"></button>
+      </div>
+    ));
+    return Alltasks;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>TO DO</h1>
+      <Form placeholder="Enter your duty" addNewValue={addNewTask} />
+      <ListAllTasks />
     </div>
   );
 }
