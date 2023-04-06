@@ -31,30 +31,19 @@ function App() {
       if (el.id === task) el.completed = !el.completed;
     });
     settodoList([...todoList]);
+    console.log(e.target.closest("div"));
   }
 
   return (
     <div className="App">
       <h1>TO DO</h1>
       <Form placeholder="Enter your duty" onSubmit={addNewTask} />
-      {todoList.map((el) => (
-        <Tasks
-          removeTask={removeTask}
-          markComplete={markComplete}
-          key={el.id}
-          el={el}
-        />
-      ))}
+      <Tasks
+        list={todoList}
+        removeTask={removeTask}
+        markComplete={markComplete}
+      />
       <Filter />
-
-      {completedTask.map((el) => (
-        <Tasks
-          removeTask={removeTask}
-          markComplete={markComplete}
-          key={el.id}
-          el={el}
-        />
-      ))}
     </div>
   );
 }
