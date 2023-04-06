@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Form(props) {
+export function Form(props) {
   let [current, setCurrent] = useState("");
 
   function handleChange(e) {

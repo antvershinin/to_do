@@ -1,8 +1,9 @@
-export default function Filter() {
+export default function Filter({ onClick }) {
   return (
     <div className="app__filter">
-      <button className="filter__button">Active</button>
-      <button className="filter__button">Completed</button>
+      <input type="button" value="All" />
+      <input type="button" value="Active" />
+      <input type="button" value="Completed" />
     </div>
   );
 }
