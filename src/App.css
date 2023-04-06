@@ -1,4 +1,21 @@
-.toDoItem {
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+*{
+    font-family: 'Caveat';
+    font-size: 30px;
+
+}
+
+body {
     display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+.app {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    
 }

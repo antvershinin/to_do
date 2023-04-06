@@ -1,6 +1,6 @@
-export default function Filter({}) {
+export default function Filter({ setFilter }) {
   function onClick(e) {
-    // if (e.target.value === "Completed") console.log("object");
+    setFilter(e.target.value);
   }
 
   return (
