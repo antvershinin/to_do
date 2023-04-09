@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export function Form(props) {
-  let [current, setCurrent] = useState("");
+export const Form = (props) => {
+  let [current, setCurrent] = useState(props.defaultValue || "");
 
   function handleChange(e) {
     setCurrent(e.target.value);
@@ -24,4 +24,4 @@ export function Form(props) {
       ></input>
     </form>
   );
-}
+};
