@@ -3,9 +3,9 @@ import { nanoid } from "nanoid";
 import Form from "./Components/Form/Form";
 import Header from "./Components/Header/Header";
 import Filter from "./Components/Filter/Filter";
-import "./App.css";
+import style from "./App.module.css";
 import Toolbar from "./Components/Toolbar/Toolbar";
-import TaskList from "./Components/TaskList/TaskList";
+import ToDoItem from "./Components/ToDoItem/ToDoItem";
 
 function App() {
   let [todoList, settodoList] = useState([]);
@@ -85,17 +85,19 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className={style.app}>
       <Header list={activeList} filter={filter} />
 
       <Form placeholder="Enter your duty" onSubmit={addNewTask} />
       <Filter setFilter={setFilter} />
-      <TaskList
-        list={activeList}
-        removeTask={removeTask}
-        markComplete={markComplete}
-        editTask={editTask}
-      />
+      <div className={style.list}>
+        <ToDoItem
+          list={activeList}
+          removeTask={removeTask}
+          markComplete={markComplete}
+          editTask={editTask}
+        />
+      </div>
       <Toolbar completeAll={completeAll} clearAll={clearAll} />
     </div>
   );

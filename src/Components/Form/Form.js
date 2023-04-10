@@ -1,4 +1,5 @@
 import { useState } from "react";
+import style from "./Form.module.css";
 
 const Form = (props) => {
   let [current, setCurrent] = useState(props.defaultValue || "");
@@ -14,10 +15,10 @@ const Form = (props) => {
   }
 
   return (
-    <form className="app__form" onSubmit={handleSubmit}>
+    <form className={style.form} onSubmit={handleSubmit}>
       <input
         type={props.type}
-        className="form__input"
+        className={style.input}
         placeholder={props.placeholder}
         onChange={handleChange}
         value={current}
