@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import { Form } from "./Components/Form";
-import Tasks from "./Components/Tasks";
-import Counter from "./Components/Counter";
-import Filter from "./Components/Filter";
+import Form from "./Components/Form/Form";
+import Header from "./Components/Header/Header";
+import Filter from "./Components/Filter/Filter";
 import "./App.css";
+import Toolbar from "./Components/Toolbar/Toolbar";
+import TaskList from "./Components/TaskList/TaskList";
 
 function App() {
   let [todoList, settodoList] = useState([]);
@@ -17,14 +18,6 @@ function App() {
 
       case "Completed":
         return todoList.filter((el) => el.completed);
-
-      case "Complete All":
-        setFilter("Completed");
-        return todoList.map((el) => (el.completed = true));
-
-      case "Clear All":
-        setFilter("All");
-        settodoList([]);
 
       default:
         return todoList;
@@ -78,24 +71,32 @@ function App() {
     settodoList([...todoList]);
   };
 
+  const completeAll = () => {
+    let tumbler = todoList[0].completed;
+    todoList.map((el) => {
+      el.completed = !tumbler;
+    });
+
+    settodoList([...todoList]);
+  };
+
+  const clearAll = () => {
+    settodoList([]);
+  };
+
   return (
     <div className="app">
-      <div className="header">
-        <h1>TO DO</h1>
-        <h3>
-          <Counter filter={filter} list={activeList} />
-        </h3>
-      </div>
-      <Filter setFilter={setFilter} />
+      <Header list={activeList} filter={filter} />
+
       <Form placeholder="Enter your duty" onSubmit={addNewTask} />
-      <div className="task__list">
-        <Tasks
-          list={activeList}
-          removeTask={removeTask}
-          markComplete={markComplete}
-          editTask={editTask}
-        />
-      </div>
+      <Filter setFilter={setFilter} />
+      <TaskList
+        list={activeList}
+        removeTask={removeTask}
+        markComplete={markComplete}
+        editTask={editTask}
+      />
+      <Toolbar completeAll={completeAll} clearAll={clearAll} />
     </div>
   );
 }

@@ -1,8 +1,7 @@
-export default function Filter({ setFilter }) {
+const Filter = ({ setFilter }) => {
   function onClick(e) {
     setFilter(e.target.value);
   }
-
   return (
     <div onClick={onClick} className="app__filter">
       <div className="filter__button">
@@ -17,16 +16,8 @@ export default function Filter({ setFilter }) {
         <input id="Completed" type="radio" value="Completed" name="filter" />
         <label htmlFor="Completed">Completed</label>
       </div>
-      <input
-        type="button"
-        className="manage__button manage__button--complete"
-        value="Complete All"
-      ></input>
-      <input
-        type="button"
-        className="manage__button manage__button--clear"
-        value="Clear All"
-      ></input>
     </div>
   );
-}
+};
+
+export default Filter;

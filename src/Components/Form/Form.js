@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Form = (props) => {
+const Form = (props) => {
   let [current, setCurrent] = useState(props.defaultValue || "");
 
   function handleChange(e) {
@@ -25,3 +25,5 @@ export const Form = (props) => {
     </form>
   );
 };
+
+export default Form;

@@ -1,6 +1,6 @@
 import "./Styles.css";
 
-export default function Tasks({ removeTask, markComplete, editTask, list }) {
+const TaskList = ({ removeTask, markComplete, editTask, list }) => {
   return list.map((el) => (
     <div key={el.id} id={el.id} className="toDoItem">
       <p
@@ -23,4 +23,6 @@ export default function Tasks({ removeTask, markComplete, editTask, list }) {
       </p>
     </div>
   ));
-}
+};
+
+export default TaskList;
