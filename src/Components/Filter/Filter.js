@@ -1,11 +1,15 @@
 import style from "./Filter.module.css";
+import { setFilter } from "../../redux/filterSlice";
+import { useDispatch } from "react-redux";
 
-const Filter = ({ setFilter }) => {
-  function onClick(e) {
-    setFilter(e.target.value);
+const Filter = ({}) => {
+  const dispatch = useDispatch();
+  function onClickFilter(id) {
+    if (!id) return;
+    dispatch(setFilter({ filterName: id }));
   }
   return (
-    <div onClick={onClick} className={style.filter}>
+    <div onClick={(e) => onClickFilter(e.target.id)} className={style.filter}>
       <div className={style.button}>
         <input id="All" type="radio" value="All" name="filter" />
         <label htmlFor="All">All</label>

@@ -1,16 +1,28 @@
 import style from "./Toolbar.module.css";
+import { useDispatch } from "react-redux";
+import { completeAll, clearAll } from "../../redux/todoSlice";
 
-const Toolbar = ({ completeAll, clearAll }) => {
+const Toolbar = () => {
+  const dispatch = useDispatch();
+
+  const onClickComplete = () => {
+    dispatch(completeAll());
+  };
+
+  const onClickClear = () => {
+    dispatch(clearAll());
+  };
+
   return (
     <div className={style.toolbar}>
       <input
-        onClick={completeAll}
+        onClick={() => onClickComplete()}
         type="button"
         className={`${style.button} ${style.button__complete}`}
         value="Complete All"
       ></input>
       <input
-        onClick={clearAll}
+        onClick={() => onClickClear()}
         type="button"
         className={`${style.button} ${style.button__clear}`}
         value="Clear All"
