@@ -5,13 +5,13 @@ import Header from "./Components/Header/Header";
 import Filter from "./Components/Filter/Filter";
 import style from "./App.module.css";
 import Toolbar from "./Components/Toolbar/Toolbar";
-import ToDoItem from "./Components/ToDoItem/ToDoItem";
+import ToDoList from "./Components/ToDoList/ToDoList";
 
 function App() {
   let [todoList, settodoList] = useState([]);
   let [filter, setFilter] = useState("All");
 
-  function checkList() {
+  const checkList = () => {
     switch (filter) {
       case "Active":
         return todoList.filter((el) => !el.completed);
@@ -22,11 +22,11 @@ function App() {
       default:
         return todoList;
     }
-  }
+  };
 
   const activeList = checkList();
 
-  function addNewTask(text) {
+  const addNewTask = (text) => {
     if (!text.trim()) {
       return;
     }
@@ -37,35 +37,16 @@ function App() {
       isEditing: false,
     };
     settodoList([newTask, ...todoList]);
-  }
+  };
 
-  function removeTask(id) {
+  const removeTask = (id) => {
     const newList = todoList.filter((el) => el.id !== id);
     settodoList([...newList]);
-  }
+  };
 
-  function markComplete(id) {
+  const markComplete = (id) => {
     todoList.map((el) => {
       if (el.id === id) el.completed = !el.completed;
-    });
-
-    settodoList([...todoList]);
-  }
-
-  const editTask = (id) => {
-    todoList.map((el) => {
-      if (el.id === id) {
-        el.isEditing = (
-          <Form
-            defaultValue={el.text}
-            onSubmit={(newText) => {
-              el.text = newText;
-              el.isEditing = false;
-              settodoList([...todoList]);
-            }}
-          />
-        );
-      }
     });
 
     settodoList([...todoList]);
@@ -91,11 +72,10 @@ function App() {
       <Form placeholder="Enter your duty" onSubmit={addNewTask} />
       <Filter setFilter={setFilter} />
       <div className={style.list}>
-        <ToDoItem
+        <ToDoList
           list={activeList}
           removeTask={removeTask}
           markComplete={markComplete}
-          editTask={editTask}
         />
       </div>
       <Toolbar completeAll={completeAll} clearAll={clearAll} />

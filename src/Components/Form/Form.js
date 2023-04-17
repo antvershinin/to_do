@@ -4,15 +4,15 @@ import style from "./Form.module.css";
 const Form = (props) => {
   let [current, setCurrent] = useState(props.defaultValue || "");
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setCurrent(e.target.value);
-  }
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     props.onSubmit(current);
     setCurrent("");
-  }
+  };
 
   return (
     <form className={style.form} onSubmit={handleSubmit}>
