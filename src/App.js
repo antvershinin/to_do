@@ -45,20 +45,24 @@ function App() {
   };
 
   const markComplete = (id) => {
-    todoList.map((el) => {
-      if (el.id === id) el.completed = !el.completed;
+    const newList = todoList.map((el) => {
+      if (el.id !== id) return el;
+      else return { ...el, completed: !el.completed };
     });
 
-    settodoList([...todoList]);
+    settodoList([...newList]);
   };
 
   const completeAll = () => {
-    let tumbler = todoList[0].completed;
-    todoList.map((el) => {
-      el.completed = !tumbler;
+    let tumbler = todoList.some((el) => !el.completed);
+    const newList = todoList.map((el) => {
+      return {
+        ...el,
+        completed: tumbler ? true : false,
+      };
     });
 
-    settodoList([...todoList]);
+    settodoList([...newList]);
   };
 
   const clearAll = () => {
@@ -71,13 +75,11 @@ function App() {
 
       <Form placeholder="Enter your duty" onSubmit={addNewTask} />
       <Filter setFilter={setFilter} />
-      <div className={style.list}>
-        <ToDoList
-          list={activeList}
-          removeTask={removeTask}
-          markComplete={markComplete}
-        />
-      </div>
+      <ToDoList
+        list={activeList}
+        removeTask={removeTask}
+        markComplete={markComplete}
+      />
       <Toolbar completeAll={completeAll} clearAll={clearAll} />
     </div>
   );

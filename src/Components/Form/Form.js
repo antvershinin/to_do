@@ -14,8 +14,18 @@ const Form = (props) => {
     setCurrent("");
   };
 
+  const cancelChanges = (e) => {
+    if (e.key === "Escape") {
+      props.cancelChanges();
+    }
+  };
+
   return (
-    <form className={style.form} onSubmit={handleSubmit}>
+    <form
+      className={style.form}
+      onSubmit={handleSubmit}
+      onKeyDown={(e) => cancelChanges(e)}
+    >
       <input
         type={props.type}
         className={style.input}

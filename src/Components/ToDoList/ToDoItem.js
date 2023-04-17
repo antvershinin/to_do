@@ -3,19 +3,23 @@ import { useState } from "react";
 import Form from "../Form/Form";
 
 const ToDoItem = ({ removeTask, markComplete, el }) => {
-  const [editing, setEditing] = useState(true);
-  const [newText, setNewText] = useState(el.text);
+  const [editStatus, setEditStatus] = useState(true);
 
   const editTask = (el) => {
-    el.isEditing = editing;
-    setEditing(false);
+    el.isEditing = editStatus;
+    setEditStatus(false);
   };
 
   const checkEditing = (text) => {
     if (!text) return;
     el.text = text;
-    el.isEditing = editing;
-    setNewText("");
+    el.isEditing = editStatus;
+    setEditStatus(true);
+  };
+
+  const cancelChanges = () => {
+    el.isEditing = editStatus;
+    setEditStatus(true);
   };
 
   return (
@@ -33,7 +37,11 @@ const ToDoItem = ({ removeTask, markComplete, el }) => {
           {el.isEditing || el.text}
         </span>
       ) : (
-        <Form defaultValue={newText} onSubmit={checkEditing} />
+        <Form
+          defaultValue={el.text}
+          onSubmit={checkEditing}
+          cancelChanges={cancelChanges}
+        />
       )}
       <p className={style.button__remove} onClick={() => removeTask(el.id)}>
         Х
