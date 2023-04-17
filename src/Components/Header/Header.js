@@ -1,3 +1,4 @@
+import { selectFilter } from "../../redux/selectors";
 import Counter from "./Counter";
 import style from "./Header.module.css";
 
@@ -11,3 +12,4 @@ const Header = () => {
 };
 
 export default Header;
+console.log(selectFilter.value);
