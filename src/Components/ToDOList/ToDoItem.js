@@ -3,6 +3,7 @@ import { markComplete } from "../../redux/todoSlice";
 import { deleteTask } from "../../redux/todoSlice";
 import { editTask } from "../../redux/todoSlice";
 import style from "./ToDoList.module.css";
+import Form from "../Form/Form";
 
 const ToDoItem = ({ id, text, completed, inEditing }) => {
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ const ToDoItem = ({ id, text, completed, inEditing }) => {
 
   const onDoubleClickEdit = () => {
     dispatch(editTask({ id: id }));
-    console.log(text);
   };
 
   return (
@@ -29,13 +29,17 @@ const ToDoItem = ({ id, text, completed, inEditing }) => {
       >
         ✔
       </p>
-      <span
-        id={id}
-        className={completed ? style.task__completed : style.task__active}
-        onDoubleClick={() => onDoubleClickEdit()}
-      >
-        {inEditing || text}
-      </span>
+      {inEditing ? (
+        <Form defaultValue={text} id={id} />
+      ) : (
+        <span
+          id={id}
+          className={completed ? style.task__completed : style.task__active}
+          onDoubleClick={() => onDoubleClickEdit()}
+        >
+          {inEditing || text}
+        </span>
+      )}
       <p
         id={id}
         onClick={() => onClickDelete()}

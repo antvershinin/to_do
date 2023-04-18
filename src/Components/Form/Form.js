@@ -2,6 +2,7 @@ import { useState } from "react";
 import style from "./Form.module.css";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../redux/todoSlice";
+import { changeText } from "../../redux/todoSlice";
 
 const Form = (props) => {
   const [currentValue, setCurrentValue] = useState(props.defaultValue || "");
@@ -14,11 +15,13 @@ const Form = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(
-      addTask({
-        text: currentValue,
-      })
-    );
+    props.id
+      ? dispatch(changeText({ id: props.id, text: currentValue }))
+      : dispatch(
+          addTask({
+            text: currentValue,
+          })
+        );
 
     setCurrentValue("");
   }

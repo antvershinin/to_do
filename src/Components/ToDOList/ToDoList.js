@@ -2,8 +2,10 @@ import { listByFilter } from "../../redux/selectors";
 import ToDoItem from "./ToDoItem";
 import { useSelector } from "react-redux";
 
-const ToDOList = () => {
+const ToDoList = () => {
   const tasks = useSelector(listByFilter);
+
+  console.log(tasks);
 
   return tasks.map((el) => (
     <ToDoItem
@@ -16,4 +18,4 @@ const ToDOList = () => {
   ));
 };
 
-export default ToDOList;
+export default ToDoList;

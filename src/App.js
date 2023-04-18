@@ -2,7 +2,7 @@ import Form from "./Components/Form/Form";
 import Header from "./Components/Header/Header";
 import Filter from "./Components/Filter/Filter";
 import Toolbar from "./Components/Toolbar/Toolbar";
-import ToDOList from "./Components/ToDOList/ToDoList";
+import ToDoList from "./Components/ToDoList/ToDoList";
 import style from "./App.module.css";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Form placeholder="Enter your duty" />
       <Filter />
-      <ToDOList />
+      <ToDoList />
       <Toolbar />
     </div>
   );

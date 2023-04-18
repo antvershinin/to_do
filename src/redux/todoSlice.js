@@ -3,7 +3,7 @@ import { nanoid } from "@reduxjs/toolkit";
 
 const todoSlice = createSlice({
   name: "tasks",
-  initialState: [],
+  initialState: { tasks: [] },
   reducers: {
     addTask: (state, action) => {
       if (!action.payload.text.trim()) return;
@@ -13,32 +13,41 @@ const todoSlice = createSlice({
         completed: false,
         inEditing: false,
       };
-      state.unshift(newTask);
+      state.tasks.unshift(newTask);
     },
     markComplete: (state, action) => {
-      state.map((el) => {
+      state.tasks.filter((el) => {
         if (el.id === action.payload.id) {
           el.completed = !el.completed;
         }
       });
     },
     deleteTask: (state, action) => {
-      return state.filter((el) => el.id !== action.payload.id);
+      state.tasks = state.tasks.filter((el) => el.id !== action.payload.id);
     },
     editTask: (state, action) => {
-      state.map((el) => {
+      state.tasks.map((el) => {
         if (el.id === action.payload.id) {
+          el.inEditing = true;
         }
       });
       return state;
     },
+    changeText: (state, action) => {
+      state = state.tasks.map((el) => {
+        if (el.id === action.payload.id) {
+          el.inEditing = false;
+          return (el.text = action.payload.text);
+        }
+      });
+    },
     completeAll: (state) => {
-      if (state.length === 0) return;
-      const tumbler = state[0].completed;
-      state.map((el) => (el.completed = !tumbler));
+      if (state.tasks.length === 0) return;
+      const tumbler = state.tasks[0].completed;
+      state.tasks.map((el) => (el.completed = !tumbler));
     },
     clearAll: (state) => {
-      return (state = []);
+      state.tasks = [];
     },
   },
 });
@@ -48,6 +57,7 @@ export const {
   markComplete,
   deleteTask,
   editTask,
+  changeText,
   completeAll,
   clearAll,
 } = todoSlice.actions;
