@@ -34,14 +34,13 @@ function App() {
       id: nanoid(8),
       text: text,
       completed: false,
-      isEditing: false,
     };
     settodoList([newTask, ...todoList]);
   };
 
   const removeTask = (id) => {
     const newList = todoList.filter((el) => el.id !== id);
-    settodoList([...newList]);
+    settodoList(newList);
   };
 
   const markComplete = (id) => {
@@ -50,7 +49,7 @@ function App() {
       else return { ...el, completed: !el.completed };
     });
 
-    settodoList([...newList]);
+    settodoList(newList);
   };
 
   const completeAll = () => {
@@ -58,11 +57,19 @@ function App() {
     const newList = todoList.map((el) => {
       return {
         ...el,
-        completed: tumbler ? true : false,
+        completed: tumbler,
       };
     });
 
-    settodoList([...newList]);
+    settodoList(newList);
+  };
+
+  const editTask = (newText, id) => {
+    const newList = todoList.map((el) => {
+      if (el.id !== id) return el;
+      return { ...el, text: newText };
+    });
+    settodoList(newList);
   };
 
   const clearAll = () => {
@@ -79,6 +86,7 @@ function App() {
         list={activeList}
         removeTask={removeTask}
         markComplete={markComplete}
+        editTask={editTask}
       />
       <Toolbar completeAll={completeAll} clearAll={clearAll} />
     </div>
