@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 const ToDoList = () => {
   const tasks = useSelector(listByFilter);
 
-  console.log(tasks);
-
   return tasks.map((el) => (
     <ToDoItem
       completed={el.completed}

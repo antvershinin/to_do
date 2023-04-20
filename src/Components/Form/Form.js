@@ -1,13 +1,8 @@
 import { useState } from "react";
 import style from "./Form.module.css";
-import { useDispatch } from "react-redux";
-import { addTask } from "../../redux/todoSlice";
-import { changeText } from "../../redux/todoSlice";
 
 const Form = (props) => {
   const [currentValue, setCurrentValue] = useState(props.defaultValue || "");
-
-  const dispatch = useDispatch();
 
   function handleChange(e) {
     setCurrentValue(e.target.value);
@@ -15,13 +10,7 @@ const Form = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.id
-      ? dispatch(changeText({ id: props.id, text: currentValue }))
-      : dispatch(
-          addTask({
-            text: currentValue,
-          })
-        );
+    props.onSubmit(currentValue);
 
     setCurrentValue("");
   }

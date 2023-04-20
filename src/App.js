@@ -9,7 +9,7 @@ function App() {
   return (
     <div className={style.app}>
       <Header />
-      <Form placeholder="Enter your duty" />
+      {/* <Form placeholder="Enter your duty" /> */}
       <Filter />
       <ToDoList />
       <Toolbar />

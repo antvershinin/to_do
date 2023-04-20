@@ -1,50 +1,49 @@
 import { useDispatch } from "react-redux";
-import { markComplete } from "../../redux/todoSlice";
-import { deleteTask } from "../../redux/todoSlice";
-import { editTask } from "../../redux/todoSlice";
+import { markComplete, deleteTask, changeText } from "../../redux/todoSlice";
+
 import style from "./ToDoList.module.css";
 import Form from "../Form/Form";
+import { useState } from "react";
 
-const ToDoItem = ({ id, text, completed, inEditing }) => {
+const ToDoItem = ({ id, text, completed }) => {
+  const [editStatus, setEditStatus] = useState("");
+
   const dispatch = useDispatch();
 
   const onClickComplete = () => {
-    dispatch(markComplete({ id: id }));
+    dispatch(markComplete({ id }));
   };
 
   const onClickDelete = () => {
-    dispatch(deleteTask({ id: id }));
+    dispatch(deleteTask({ id }));
   };
 
-  const onDoubleClickEdit = () => {
-    dispatch(editTask({ id: id }));
+  const changeEditStatus = () => {
+    setEditStatus(id);
+  };
+
+  const onSubmitChangeText = (text) => {
+    dispatch(changeText({ id: editStatus, text }));
+
+    setEditStatus("");
   };
 
   return (
-    <div key={id} id={id} className={style.toDoItem}>
-      <p
-        id={id}
-        onClick={() => onClickComplete()}
-        className={style.button__complete}
-      >
+    <div className={style.toDoItem}>
+      <p onClick={onClickComplete} className={style.button__complete}>
         ✔
       </p>
-      {inEditing ? (
-        <Form defaultValue={text} id={id} />
+      {editStatus ? (
+        <Form defaultValue={text} onSubmit={onSubmitChangeText} />
       ) : (
         <span
-          id={id}
+          onDoubleClick={changeEditStatus}
           className={completed ? style.task__completed : style.task__active}
-          onDoubleClick={() => onDoubleClickEdit()}
         >
-          {inEditing || text}
+          {text}
         </span>
       )}
-      <p
-        id={id}
-        onClick={() => onClickDelete()}
-        className={style.button__remove}
-      >
+      <p onClick={onClickDelete} className={style.button__remove}>
         X
       </p>
     </div>
