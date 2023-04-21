@@ -1,4 +1,3 @@
-import Form from "./Components/Form/Form";
 import Header from "./Components/Header/Header";
 import Filter from "./Components/Filter/Filter";
 import Toolbar from "./Components/Toolbar/Toolbar";
@@ -9,7 +8,6 @@ function App() {
   return (
     <div className={style.app}>
       <Header />
-      {/* <Form placeholder="Enter your duty" /> */}
       <Filter />
       <ToDoList />
       <Toolbar />

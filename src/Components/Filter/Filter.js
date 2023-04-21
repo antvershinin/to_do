@@ -2,7 +2,7 @@ import style from "./Filter.module.css";
 import { setFilter } from "../../redux/todoSlice";
 import { useDispatch } from "react-redux";
 
-const Filter = ({}) => {
+const Filter = () => {
   const dispatch = useDispatch();
   function onClickFilter(id) {
     if (!id) return;

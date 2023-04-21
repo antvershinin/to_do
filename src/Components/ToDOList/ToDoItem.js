@@ -10,18 +10,6 @@ const ToDoItem = ({ id, text, completed }) => {
 
   const dispatch = useDispatch();
 
-  const onClickComplete = () => {
-    dispatch(markComplete({ id }));
-  };
-
-  const onClickDelete = () => {
-    dispatch(deleteTask({ id }));
-  };
-
-  const changeEditStatus = () => {
-    setEditStatus(id);
-  };
-
   const onSubmitChangeText = (text) => {
     dispatch(changeText({ id: editStatus, text }));
 
@@ -30,20 +18,26 @@ const ToDoItem = ({ id, text, completed }) => {
 
   return (
     <div className={style.toDoItem}>
-      <p onClick={onClickComplete} className={style.button__complete}>
+      <p
+        onClick={() => dispatch(markComplete({ id }))}
+        className={style.button__complete}
+      >
         ✔
       </p>
       {editStatus ? (
         <Form defaultValue={text} onSubmit={onSubmitChangeText} />
       ) : (
         <span
-          onDoubleClick={changeEditStatus}
+          onDoubleClick={() => setEditStatus(id)}
           className={completed ? style.task__completed : style.task__active}
         >
           {text}
         </span>
       )}
-      <p onClick={onClickDelete} className={style.button__remove}>
+      <p
+        onClick={() => dispatch(deleteTask({ id }))}
+        className={style.button__remove}
+      >
         X
       </p>
     </div>
