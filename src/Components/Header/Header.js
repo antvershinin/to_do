@@ -11,7 +11,10 @@ const Header = () => {
       <div className={style.header}>
         <h1 className="title">To DO List</h1>
       </div>
-      <Form onSubmit={(text) => dispatch(addTask({ text }))} />
+      <Form
+        placeholder="Enter your duty"
+        onSubmit={(text) => dispatch(addTask({ text }))}
+      />
     </>
   );
 };
