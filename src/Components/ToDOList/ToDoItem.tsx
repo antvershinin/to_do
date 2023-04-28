@@ -5,14 +5,12 @@ import { useState } from "react";
 import React from "react";
 import { ITask } from "../../redux/todoSlice";
 
-interface IToDoItemState 
-
-const ToDoItem:ITask = ({ id, text, completed }) => {
+const ToDoItem: React.FC<ITask> = ({ id, text }) => {
   const [editStatus, setEditStatus] = useState("");
 
   const dispatch = useDispatch();
 
-  const onSubmitChangeText = (text) => {
+  const onSubmitChangeText = (text: string) => {
     dispatch(changeText({ id: editStatus, text }));
 
     setEditStatus("");
@@ -20,28 +18,13 @@ const ToDoItem:ITask = ({ id, text, completed }) => {
 
   return (
     <div>
-      <p
-        onClick={() => dispatch(markComplete({ id }))}
-        
-      >
-        ✔
-      </p>
+      <p onClick={() => dispatch(markComplete({ id }))}>✔</p>
       {editStatus ? (
         <Form defaultValue={text} onSubmit={onSubmitChangeText} />
       ) : (
-        <span
-          onDoubleClick={() => setEditStatus(id)}
-          
-        >
-          {text}
-        </span>
+        <span onDoubleClick={() => setEditStatus(id)}>{text}</span>
       )}
-      <p
-        onClick={() => dispatch(deleteTask({ id }))}
- 
-      >
-        X
-      </p>
+      <p onClick={() => dispatch(deleteTask({ id }))}>X</p>
     </div>
   );
 };

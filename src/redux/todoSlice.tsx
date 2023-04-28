@@ -2,20 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
 
 export interface ITask {
-  id: string,
-  text: string,
-  completed: boolean
+  id: string;
+  text: string;
+  completed: boolean;
 }
 
-interface ITaskState {
-  tasks: ITask[],
-  activeFilter: string
+export interface ITaskState {
+  tasks: ITask[];
+  activeFilter: string;
 }
 
-const initialState:ITaskState = {
+export const initialState: ITaskState = {
   tasks: [],
-  activeFilter: 'All'
-}
+  activeFilter: "All",
+};
 
 const todoSlice = createSlice({
   name: "tasks",
