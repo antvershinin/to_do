@@ -1,3 +1,4 @@
+import React from "react";
 import { listByFilter } from "../../redux/selectors";
 import ToDoItem from "./ToDoItem";
 import { useSelector } from "react-redux";
@@ -8,7 +9,6 @@ const ToDoList = () => {
   return tasks.map((el) => (
     <ToDoItem
       completed={el.completed}
-      inEditing={el.inEditing}
       key={el.id}
       id={el.id}
       text={el.text}

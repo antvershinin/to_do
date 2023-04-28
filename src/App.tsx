@@ -2,11 +2,12 @@ import Header from "./Components/Header/Header";
 import Filter from "./Components/Filter/Filter";
 import Toolbar from "./Components/Toolbar/Toolbar";
 import ToDoList from "./Components/ToDoList/ToDoList";
-import style from "./App.module.css";
+import React from "react";
 
-function App() {
+
+const App = () => {
   return (
-    <div className={style.app}>
+    <div>
       <Header />
       <Filter />
       <ToDoList />
@@ -15,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export default  App;

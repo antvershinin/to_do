@@ -1,9 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
 
+export interface ITask {
+  id: string,
+  text: string,
+  completed: boolean
+}
+
+interface ITaskState {
+  tasks: ITask[],
+  activeFilter: string
+}
+
+const initialState:ITaskState = {
+  tasks: [],
+  activeFilter: 'All'
+}
+
 const todoSlice = createSlice({
   name: "tasks",
-  initialState: { tasks: [], activeFilter: null },
+  initialState,
   reducers: {
     addTask: (state, action) => {
       if (!action.payload.text.trim()) return;
@@ -26,7 +42,7 @@ const todoSlice = createSlice({
     },
 
     changeText: (state, action) => {
-      state = state.tasks.map((el) => {
+      state.tasks.map((el) => {
         if (el.id === action.payload.id) el.text = action.payload.text;
       });
     },
@@ -48,7 +64,6 @@ export const {
   addTask,
   markComplete,
   deleteTask,
-  editTask,
   changeText,
   completeAll,
   clearAll,

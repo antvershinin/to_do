@@ -1,11 +1,13 @@
 import { useDispatch } from "react-redux";
 import { markComplete, deleteTask, changeText } from "../../redux/todoSlice";
-
-import style from "./ToDoList.module.css";
 import Form from "../Form/Form";
 import { useState } from "react";
+import React from "react";
+import { ITask } from "../../redux/todoSlice";
 
-const ToDoItem = ({ id, text, completed }) => {
+interface IToDoItemState 
+
+const ToDoItem:ITask = ({ id, text, completed }) => {
   const [editStatus, setEditStatus] = useState("");
 
   const dispatch = useDispatch();
@@ -17,10 +19,10 @@ const ToDoItem = ({ id, text, completed }) => {
   };
 
   return (
-    <div className={style.toDoItem}>
+    <div>
       <p
         onClick={() => dispatch(markComplete({ id }))}
-        className={style.button__complete}
+        
       >
         ✔
       </p>
@@ -29,14 +31,14 @@ const ToDoItem = ({ id, text, completed }) => {
       ) : (
         <span
           onDoubleClick={() => setEditStatus(id)}
-          className={completed ? style.task__completed : style.task__active}
+          
         >
           {text}
         </span>
       )}
       <p
         onClick={() => dispatch(deleteTask({ id }))}
-        className={style.button__remove}
+ 
       >
         X
       </p>

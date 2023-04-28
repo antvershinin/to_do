@@ -1,24 +1,26 @@
-import style from "./Filter.module.css";
+import React from "react";
 import { setFilter } from "../../redux/todoSlice";
 import { useDispatch } from "react-redux";
 
-const Filter = () => {
+const Filter:React.FC = () => {
   const dispatch = useDispatch();
-  function onClickFilter(id) {
-    if (!id) return;
-    dispatch(setFilter({ filterName: id }));
+  const onClickFilter:React.MouseEventHandler<HTMLElement> = (e) => {
+    
+    const value = e.target.value
+    if (!value) return;
+    dispatch(setFilter({ filterName: value }));
   }
   return (
-    <div onClick={(e) => onClickFilter(e.target.id)} className={style.filter}>
-      <div className={style.button}>
+    <div onClick={onClickFilter}>
+      <div>
         <input id="All" type="radio" value="All" name="filter" />
         <label htmlFor="All">All</label>
       </div>
-      <div className={style.button}>
+      <div>
         <input id="Active" type="radio" value="Active" name="filter" />
         <label htmlFor="Active">Active</label>
       </div>
-      <div className={style.button}>
+      <div>
         <input id="Completed" type="radio" value="Completed" name="filter" />
         <label htmlFor="Completed">Completed</label>
       </div>

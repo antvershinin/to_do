@@ -1,14 +1,15 @@
+import React from "react";
 import { useState } from "react";
-import style from "./Form.module.css";
+
 
 const Form = (props) => {
   const [currentValue, setCurrentValue] = useState(props.defaultValue || "");
 
-  function handleChange(e) {
+  const handleChange : React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setCurrentValue(e.target.value);
   }
 
-  function handleSubmit(e) {
+  const handleSubmit:React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     props.onSubmit(currentValue);
 
@@ -16,10 +17,10 @@ const Form = (props) => {
   }
 
   return (
-    <form className={style.form} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <input
         type={props.type}
-        className={style.input}
+       
         placeholder={props.placeholder}
         onChange={handleChange}
         value={currentValue}
