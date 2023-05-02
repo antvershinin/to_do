@@ -2,14 +2,15 @@ import React from "react";
 import { setFilter } from "../../redux/todoSlice";
 import { useDispatch } from "react-redux";
 
-const Filter:React.FC = () => {
+const Filter: React.FC = () => {
   const dispatch = useDispatch();
-  const onClickFilter:React.MouseEventHandler<HTMLElement> = (e) => {
-    
-    const value = e.target.value
+  const onClickFilter: React.MouseEventHandler<HTMLElement> = (e) => {
+    const value = e.target.value;
     if (!value) return;
     dispatch(setFilter({ filterName: value }));
-  }
+    console.log(e.target.value);
+  };
+
   return (
     <div onClick={onClickFilter}>
       <div>
