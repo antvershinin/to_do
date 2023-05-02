@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { useAppSelector } from "../../redux/store";
+import { FormStyled } from "./Form.styled";
 
 type Props = {
   onSubmit: (value: string) => void;
-  type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
   placeholder?: string;
   defaultValue?: string;
 };
@@ -24,14 +23,14 @@ const Form: React.FC<Props> = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <FormStyled onSubmit={handleSubmit}>
       <input
-        type={props.type}
+        className="form__input"
         placeholder={props.placeholder}
         onChange={handleChange}
         value={currentValue}
       ></input>
-    </form>
+    </FormStyled>
   );
 };
 

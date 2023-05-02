@@ -8,8 +8,8 @@ export interface ITask {
 }
 
 export interface ITaskState {
-  tasks: ITask[],
-  activeFilter: string
+  tasks: ITask[];
+  activeFilter: string;
 }
 
 export const initialState: ITaskState = {
@@ -21,7 +21,7 @@ const todoSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    addTask: (state, action) => {
+    addTask: (state, action: PayloadAction<{ text: string }>) => {
       if (!action.payload.text.trim()) return;
       const newTask = {
         id: nanoid(5),
@@ -30,20 +30,22 @@ const todoSlice = createSlice({
       };
       state.tasks.unshift(newTask);
     },
-    markComplete: (state, action) => {
+    markComplete: (state, action: PayloadAction<{ id: string }>) => {
       state.tasks.forEach((el) => {
-        if (el.id !== action.payload.id) return el
+        if (el.id !== action.payload.id) return el;
         el.completed = !el.completed;
-      })
-
+      });
     },
-    deleteTask: (state, action) => {
+    deleteTask: (state, action: PayloadAction<{ id: string }>) => {
       state.tasks = state.tasks.filter((el) => el.id !== action.payload.id);
     },
 
-    changeText: (state, action: PayloadAction<{ id: string; text: string }>) => {
+    changeText: (
+      state,
+      action: PayloadAction<{ id: string; text: string }>
+    ) => {
       state.tasks.forEach((el) => {
-        if (el.id !== action.payload.id) return el
+        if (el.id !== action.payload.id) return el;
         el.text = action.payload.text;
       });
     },
@@ -55,7 +57,7 @@ const todoSlice = createSlice({
     clearAll: (state) => {
       state.tasks = [];
     },
-    setFilter: (state, action) => {
+    setFilter: (state, action: PayloadAction<{ filterName: string }>) => {
       state.activeFilter = action.payload.filterName;
     },
   },

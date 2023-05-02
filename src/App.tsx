@@ -3,17 +3,17 @@ import Filter from "./Components/Filter/Filter";
 import Toolbar from "./Components/Toolbar/Toolbar";
 import ToDoList from "./Components/ToDoList/ToDoList";
 import React from "react";
-
+import { AppStyled } from "./App.styled";
 
 const App = () => {
   return (
-    <div>
+    <AppStyled>
       <Header />
       <Filter />
       <ToDoList />
       <Toolbar />
-    </div>
+    </AppStyled>
   );
-}
+};
 
-export default  App;
+export default App;
