@@ -1,9 +1,18 @@
 import React from "react";
 import { useState } from "react";
+import { useAppSelector } from "../../redux/store";
+
+type Props = {
+  onSubmit: (value: string) => void;
+  type: React.InputHTMLAttributes<HTMLInputElement>['type'];
+  placeholder: string;
+  defaultValue?: string;
+}
 
 
-const Form = (props) => {
+const Form: React.FC<Props> = (props) => {
   const [currentValue, setCurrentValue] = useState(props.defaultValue || "");
+  const {activeFilter} = useAppSelector((state) => state.tasks)
 
   const handleChange : React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setCurrentValue(e.target.value);

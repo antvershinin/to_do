@@ -7,14 +7,19 @@ import React from "react";
 const Header = () => {
   const dispatch = useDispatch();
 
+  const handleSubmit = (text:string) => {
+    dispatch(addTask({text}))
+  }
+
   return (
     <>
       <div>
         <h1 className="title">To DO List</h1>
       </div>
       <Form
-        placeholder="Enter your duty"
-        onSubmit={(text: string) => dispatch(addTask({ text }))}
+        onSubmit={handleSubmit}
+        type="text"
+        placeholder="sd"
       />
     </>
   );
