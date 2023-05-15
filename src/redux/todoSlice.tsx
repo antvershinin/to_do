@@ -17,6 +17,7 @@ export const initialState: ITaskState = {
   activeFilter: "All",
 };
 
+
 const todoSlice = createSlice({
   name: "tasks",
   initialState,
@@ -52,7 +53,7 @@ const todoSlice = createSlice({
     completeAll: (state) => {
       if (state.tasks.length === 0) return;
       const tumbler = state.tasks.some((el) => !el.completed);
-      state.tasks.map((el) => (el.completed = tumbler));
+      state.tasks.forEach((el) => (el.completed = tumbler));
     },
     clearAll: (state) => {
       state.tasks = [];

@@ -6,7 +6,7 @@ export const ToolbarStyled = styled.div`
   justify-content: space-around;
 `;
 
-export const ToolbarButton = styled.input<{ complete: boolean }>`
+export const ToolbarButton = styled.input<{ complete?: boolean }>`
   background-color: #fff;
   border: none;
   cursor: pointer;

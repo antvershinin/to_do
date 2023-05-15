@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { FormStyled } from "./Form.styled";
 
+
 type Props = {
   onSubmit: (value: string) => void;
   placeholder?: string;

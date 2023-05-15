@@ -19,14 +19,13 @@ const Toolbar: React.FC<Props> = () => {
   return (
     <ToolbarStyled>
       <ToolbarButton
-        complete={true}
-        onClick={() => onClickComplete()}
+        complete
+        onClick={onClickComplete}
         type="button"
         value="Complete All"
       ></ToolbarButton>
       <ToolbarButton
-        complete={false}
-        onClick={() => onClickClear()}
+        onClick={onClickClear}
         type="button"
         value="Clear All"
       ></ToolbarButton>
