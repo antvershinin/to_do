@@ -5,6 +5,7 @@ import { useState } from "react";
 import React from "react";
 import { ITask } from "../../redux/todoSlice";
 import { TaskStyled } from "./ToDoList.styled";
+import { completeTodoDB } from "../api/TodoAPI";
 
 type Props = {
   task: ITask;
@@ -24,11 +25,16 @@ const ToDoItem: React.FC<Props> = (props) => {
     setEditStatus("");
   };
 
+  const onClickComplete = () => {
+    dispatch(markComplete({ id }))
+    completeTodoDB(id, !completed)
+  }
+
   return (
     <TaskStyled completed={completed}>
       <p
         className="button__complete"
-        onClick={() => dispatch(markComplete({ id }))}
+        onClick={onClickComplete}
       >
         ✔
       </p>

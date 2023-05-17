@@ -9,16 +9,16 @@ type Props = {};
 const Header: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (text: string) => {
-    dispatch(addTask({ text }));
-  };
+  // const handleSubmit = (text: string) => {
+  //   dispatch(addTask({ text }));
+  // };
 
   return (
     <HeaderStyled>
       <div>
         <h1 className="title">To Do List</h1>
       </div>
-      <Form onSubmit={handleSubmit} placeholder="Enter your Duty..." />
+      <Form placeholder="Enter your Duty..." />
     </HeaderStyled>
   );
 };

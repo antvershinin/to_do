@@ -4,7 +4,7 @@ const baseURL = "http://localhost:8000/";
 
 export const getAllTodos = async () => {
   const allTodos = await axios.get(baseURL + "todos");
-  console.log(allTodos.data);
+  return allTodos
 };
 
 export const editTodoDB = async (id: String, newText: String) => {
@@ -12,5 +12,14 @@ export const editTodoDB = async (id: String, newText: String) => {
     text: newText,
   });
 };
+export const completeTodoDB = async (id: String, completed: Boolean) => {
+  await axios.put(baseURL + id, {
+    completed
+  });
+};
 
-editTodoDB("6464bfa7eb0d6a27a8bd5f83", "НОВЫЙШИЙ ТЕКСТ");
+export const addTodoDB =async (text : String) => {
+  await axios.post(baseURL, {text})
+}
+
+

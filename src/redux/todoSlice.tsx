@@ -22,6 +22,9 @@ const todoSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+    fillState: (state, action) => {
+      state.tasks = [...action.payload]
+    },
     addTask: (state, action: PayloadAction<{ text: string }>) => {
       if (!action.payload.text.trim()) return;
       const newTask = {
@@ -65,6 +68,7 @@ const todoSlice = createSlice({
 });
 
 export const {
+  fillState,
   addTask,
   markComplete,
   deleteTask,
