@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { FormStyled } from "./Form.styled";
-
+import { getAllTodos } from "../api/TodoAPI";
 
 type Props = {
   onSubmit: (value: string) => void;
@@ -19,7 +19,7 @@ const Form: React.FC<Props> = (props) => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     props.onSubmit(currentValue);
-
+    getAllTodos();
     setCurrentValue("");
   };
 
