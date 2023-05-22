@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "@reduxjs/toolkit";
 
 export interface ITask {
+  _id: String;
   id: string;
   text: string;
   completed: boolean;
@@ -17,22 +17,12 @@ export const initialState: ITaskState = {
   activeFilter: "All",
 };
 
-
 const todoSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
     fillState: (state, action) => {
-      state.tasks = [...action.payload]
-    },
-    addTask: (state, action: PayloadAction<{ text: string }>) => {
-      if (!action.payload.text.trim()) return;
-      const newTask = {
-        id: nanoid(5),
-        text: action.payload.text,
-        completed: false,
-      };
-      state.tasks.unshift(newTask);
+      state.tasks = [...action.payload];
     },
     markComplete: (state, action: PayloadAction<{ id: string }>) => {
       state.tasks.forEach((el) => {
@@ -69,7 +59,6 @@ const todoSlice = createSlice({
 
 export const {
   fillState,
-  addTask,
   markComplete,
   deleteTask,
   changeText,

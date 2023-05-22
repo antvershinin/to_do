@@ -1,19 +1,22 @@
-import { useDispatch } from "react-redux";
-import { completeAll, clearAll } from "../../redux/todoSlice";
 import React from "react";
 import { ToolbarButton, ToolbarStyled } from "./Toolbar.styled";
+import { completeAllTodoDB, deleteAllTodos } from "../api/TodoAPI";
+import { ITask } from "../../redux/todoSlice";
+import { useSelector } from "react-redux";
+import { listByFilter } from "../../redux/selectors";
 
 type Props = {};
 
 const Toolbar: React.FC<Props> = () => {
-  const dispatch = useDispatch();
+  const tasks = useSelector(listByFilter);
 
   const onClickComplete = () => {
-    dispatch(completeAll());
+    const tumbler = tasks.some((el) => !el.completed);
+    completeAllTodoDB(tumbler);
   };
 
   const onClickClear = () => {
-    dispatch(clearAll());
+    deleteAllTodos();
   };
 
   return (

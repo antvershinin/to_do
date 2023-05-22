@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
-import { markComplete, deleteTask, changeText } from "../../redux/todoSlice";
+import { changeText } from "../../redux/todoSlice";
 import Form from "../Form/Form";
 import { useState } from "react";
 import React from "react";
 import { ITask } from "../../redux/todoSlice";
 import { TaskStyled } from "./ToDoList.styled";
-import { completeTodoDB } from "../api/TodoAPI";
+import { completeTodoDB, deleteTodoDB } from "../api/TodoAPI";
 
 type Props = {
   task: ITask;
@@ -13,7 +13,7 @@ type Props = {
 
 const ToDoItem: React.FC<Props> = (props) => {
   const {
-    task: { id, text, completed },
+    task: { id, _id, text, completed },
   } = props;
   const [editStatus, setEditStatus] = useState("");
 
@@ -26,16 +26,16 @@ const ToDoItem: React.FC<Props> = (props) => {
   };
 
   const onClickComplete = () => {
-    dispatch(markComplete({ id }))
-    completeTodoDB(id, !completed)
-  }
+    completeTodoDB(_id, !completed);
+  };
+
+  const onClickDelete = () => {
+    deleteTodoDB(_id);
+  };
 
   return (
     <TaskStyled completed={completed}>
-      <p
-        className="button__complete"
-        onClick={onClickComplete}
-      >
+      <p className="button__complete" onClick={onClickComplete}>
         ✔
       </p>
       {editStatus ? (
@@ -45,10 +45,7 @@ const ToDoItem: React.FC<Props> = (props) => {
           {text}
         </p>
       )}
-      <p
-        className="button__remove"
-        onClick={() => dispatch(deleteTask({ id }))}
-      >
+      <p className="button__remove" onClick={onClickDelete}>
         X
       </p>
     </TaskStyled>
