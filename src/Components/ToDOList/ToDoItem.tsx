@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { changeText } from "../../redux/todoSlice";
+import { changeText, markComplete } from "../../redux/todoSlice";
 import Form from "../Form/Form";
 import { useState } from "react";
 import React from "react";
@@ -25,8 +25,13 @@ const ToDoItem: React.FC<Props> = (props) => {
     setEditStatus("");
   };
 
-  const onClickComplete = () => {
-    completeTodoDB(_id, !completed);
+  const onClickComplete = async () => {
+    try {
+      await completeTodoDB(_id, !completed);
+      dispatch(markComplete({ id: _id }))
+    } catch (err) {
+
+    }
   };
 
   const onClickDelete = () => {
