@@ -28,10 +28,8 @@ const ToDoItem: React.FC<Props> = (props) => {
   const onClickComplete = async () => {
     try {
       await completeTodoDB(_id, !completed);
-      dispatch(markComplete({ id: _id }))
-    } catch (err) {
-
-    }
+      dispatch(markComplete({ id: _id }));
+    } catch (err) {}
   };
 
   const onClickDelete = () => {

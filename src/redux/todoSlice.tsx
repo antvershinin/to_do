@@ -30,11 +30,13 @@ const todoSlice = createSlice({
       //   el.completed = !el.completed;
       // });
 
-      const element = state.tasks.find(i => i._id === action.payload.id)
+      const element = state.tasks.find((i) => i._id === action.payload.id);
 
-      if (!element) { return }
+      if (!element) {
+        return;
+      }
 
-      element.completed = !element.completed
+      element.completed = !element.completed;
     },
     deleteTask: (state, action: PayloadAction<{ id: string }>) => {
       state.tasks = state.tasks.filter((el) => el.id !== action.payload.id);
