@@ -1,17 +1,22 @@
 import React from "react";
-import { setFilter } from "../../redux/todoSlice";
 import { useDispatch } from "react-redux";
 import { FilterStyled } from "./Filter.styled";
 import { getTodosDB } from "../api/TodoAPI";
+import { fillState } from "../../redux/todoSlice";
 
 type Props = {};
 
 const Filter: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
-  const onClickFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // const target = e.target as HTMLInputElement;
-    // if (!target.value) return;
+  const onClickFilter = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const filter = e.target.value;
+    try {
+      const response = await getTodosDB(filter);
+      dispatch(fillState(response.data));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

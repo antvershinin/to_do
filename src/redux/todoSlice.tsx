@@ -25,31 +25,30 @@ const todoSlice = createSlice({
       state.tasks = [...action.payload];
     },
     markComplete: (state, action: PayloadAction<{ id: string }>) => {
-      // state.tasks.forEach((el) => {
-      //   if (el.id !== action.payload.id) return el;
-      //   el.completed = !el.completed;
-      // });
+      const task = state.tasks.find((el) => el._id === action.payload.id);
 
-      const element = state.tasks.find((i) => i._id === action.payload.id);
-
-      if (!element) {
+      if (!task) {
         return;
       }
 
-      element.completed = !element.completed;
+      task.completed = !task.completed;
+    },
+    addTask: (state, action: PayloadAction<ITask>) => {
+      state.tasks.push(action.payload);
     },
     deleteTask: (state, action: PayloadAction<{ id: string }>) => {
-      state.tasks = state.tasks.filter((el) => el.id !== action.payload.id);
+      state.tasks = state.tasks.filter((el) => el._id !== action.payload.id);
     },
 
     changeText: (
       state,
       action: PayloadAction<{ id: string; text: string }>
     ) => {
-      state.tasks.forEach((el) => {
-        if (el.id !== action.payload.id) return el;
-        el.text = action.payload.text;
-      });
+      const task = state.tasks.find((el) => el._id === action.payload.id);
+
+      if (!task) return;
+
+      task.text = action.payload.text;
     },
     completeAll: (state) => {
       if (state.tasks.length === 0) return;
@@ -67,6 +66,7 @@ const todoSlice = createSlice({
 
 export const {
   fillState,
+  addTask,
   markComplete,
   deleteTask,
   changeText,

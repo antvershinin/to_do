@@ -23,4 +23,12 @@ export const TaskStyled = styled.div<{ completed: boolean }>`
     font-size: 30px;
     text-decoration: ${(props) => (props.completed ? "line-through" : "null")};
   }
+  .form__input {
+    width: 100%;
+    height: 50px;
+    padding-left: 10px;
+    border: 1px dashed;
+    font-family: "Caveat";
+    font-size: 25px;
+  }
 `;
