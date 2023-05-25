@@ -16,12 +16,12 @@ const ToDoItem: React.FC<Props> = (props) => {
   } = props;
   const [editStatus, setEditStatus] = useState("");
   const [currentValue, setCurrentValue] = useState("");
+  const dispatch = useDispatch();
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setCurrentValue(e.target.value);
   };
 
-  const dispatch = useDispatch();
 
   const onSubmitChangeText: React.FormEventHandler<HTMLFormElement> = async (
     e
@@ -31,7 +31,6 @@ const ToDoItem: React.FC<Props> = (props) => {
       await editTodoDB({
         completed,
         _id,
-        id: _id,
         text: currentValue,
       });
       dispatch(changeText({ id: _id, text: currentValue }));
@@ -47,11 +46,10 @@ const ToDoItem: React.FC<Props> = (props) => {
       await editTodoDB({
         completed: !completed,
         _id,
-        id: _id,
         text,
       });
       dispatch(markComplete({ id: _id }));
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const onClickDelete = async () => {

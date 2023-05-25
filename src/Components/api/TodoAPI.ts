@@ -5,14 +5,14 @@ const baseURL = "http://localhost:8000/";
 
 export const getTodosDB = async (filter?: string) => {
   const allTodos = await axios.get<ITask[]>(
-    baseURL + `todos` + `?filter=${filter}`
+    `${baseURL}todos?filter=${filter ?? ''}`
   );
 
   return allTodos;
 };
 
 export const addTodoDB = (text: string) => {
-  return axios.post(baseURL, { data: { text } });
+  return axios.post(baseURL + 'todos', { data: { text } });
 };
 
 export const deleteAllTodosDB = () => {

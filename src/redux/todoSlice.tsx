@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface ITask {
   _id: string;
-  id: string;
   text: string;
   completed: boolean;
 }
@@ -21,7 +20,7 @@ const todoSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    fillState: (state, action) => {
+    fillState: (state, action: PayloadAction<ITask[]>) => {
       state.tasks = [...action.payload];
     },
     markComplete: (state, action: PayloadAction<{ id: string }>) => {
