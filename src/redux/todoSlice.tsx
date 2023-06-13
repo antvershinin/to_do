@@ -21,7 +21,8 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     fillState: (state, action: PayloadAction<ITask[]>) => {
-      state.tasks = [...action.payload];
+      state.tasks = action.payload;
+      console.log(state.tasks);
     },
     markComplete: (state, action: PayloadAction<{ id: string }>) => {
       const task = state.tasks.find((el) => el.id === action.payload.id);

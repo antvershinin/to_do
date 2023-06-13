@@ -3,24 +3,22 @@ import { ITask } from "../../redux/todoSlice";
 
 const baseURL = "http://127.0.0.1:8000/todos";
 
-export const getTodosDB = async (filter?: string) => {
-  const allTodos = await axios.get<ITask[]>(
-    baseURL
-  );
+export const getTodosDB = async (filter: string) => {
+  const allTodos = await axios.get<ITask[]>(`${baseURL}/${filter}`);
 
   return allTodos;
 };
 
 export const addTodoDB = (text: string) => {
-  return axios.post(baseURL,  { text } );
+  return axios.post(baseURL, { text });
 };
 
 export const deleteAllTodosDB = () => {
-  return axios.delete(`${baseURL}/DeleteAll`);
+  return axios.delete(baseURL);
 };
 
 export const completeAllTodoDB = (tumbler: boolean) => {
-  return axios.put(`${baseURL}/CompleteAll`,  tumbler);
+  return axios.put(`${baseURL}/Complete_all`, tumbler);
 };
 
 export const deleteTodoDB = (id: string) => {
