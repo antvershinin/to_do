@@ -16,12 +16,13 @@ const App = () => {
       try {
         const response = await getTodosDB();
         dispatch(fillState(response.data));
+        console.log(response.data)
       } catch (err) {
         console.log(err);
       }
     };
     getTodos();
-  }, []);
+  });
 
   return (
     <AppStyled>

@@ -12,7 +12,7 @@ type Props = {
 
 const ToDoItem: React.FC<Props> = (props) => {
   const {
-    task: { _id, text, completed },
+    task: { id, text, completed },
   } = props;
   const [editStatus, setEditStatus] = useState("");
   const [currentValue, setCurrentValue] = useState("");
@@ -30,10 +30,10 @@ const ToDoItem: React.FC<Props> = (props) => {
     try {
       await editTodoDB({
         completed,
-        _id,
+        id,
         text: currentValue,
       });
-      dispatch(changeText({ id: _id, text: currentValue }));
+      dispatch(changeText({ id, text: currentValue }));
 
       setEditStatus("");
     } catch (err) {
@@ -45,17 +45,17 @@ const ToDoItem: React.FC<Props> = (props) => {
     try {
       await editTodoDB({
         completed: !completed,
-        _id,
+        id,
         text,
       });
-      dispatch(markComplete({ id: _id }));
+      dispatch(markComplete({ id }));
     } catch (err) { }
   };
 
   const onClickDelete = async () => {
     try {
-      await deleteTodoDB(_id);
-      dispatch(deleteTask({ id: _id }));
+      await deleteTodoDB(id);
+      dispatch(deleteTask({ id }));
     } catch (err) {
       console.log(err);
     }
@@ -75,7 +75,7 @@ const ToDoItem: React.FC<Props> = (props) => {
           ></input>
         </form>
       ) : (
-        <p className="task" onDoubleClick={() => setEditStatus(_id)}>
+        <p className="task" onDoubleClick={() => setEditStatus(id)}>
           {text}
         </p>
       )}

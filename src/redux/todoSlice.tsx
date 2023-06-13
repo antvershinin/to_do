@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface ITask {
-  _id: string;
+  id: string;
   text: string;
   completed: boolean;
 }
@@ -24,7 +24,7 @@ const todoSlice = createSlice({
       state.tasks = [...action.payload];
     },
     markComplete: (state, action: PayloadAction<{ id: string }>) => {
-      const task = state.tasks.find((el) => el._id === action.payload.id);
+      const task = state.tasks.find((el) => el.id === action.payload.id);
 
       if (!task) {
         return;
@@ -36,14 +36,14 @@ const todoSlice = createSlice({
       state.tasks.push(action.payload);
     },
     deleteTask: (state, action: PayloadAction<{ id: string }>) => {
-      state.tasks = state.tasks.filter((el) => el._id !== action.payload.id);
+      state.tasks = state.tasks.filter((el) => el.id !== action.payload.id);
     },
 
     changeText: (
       state,
       action: PayloadAction<{ id: string; text: string }>
     ) => {
-      const task = state.tasks.find((el) => el._id === action.payload.id);
+      const task = state.tasks.find((el) => el.id === action.payload.id);
 
       if (!task) return;
 
